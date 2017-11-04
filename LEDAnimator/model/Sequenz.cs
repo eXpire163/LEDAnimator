@@ -96,5 +96,12 @@ namespace LEDAnimator
                 steps.Insert(currentstep + 1, Step.Clone(CurrentStep));
             }
         }
+
+        internal void addGroup(List<int> selection, string p)
+        {
+            if (selection.Count > 1) {
+                shape.groups.Add(new Shape.KCGroup() { name = p, positions = selection.ToArray<int>() });
+            }
+        }
     }
 }
