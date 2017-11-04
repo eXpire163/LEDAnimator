@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.bSaveGroup = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.bStop = new System.Windows.Forms.Button();
             this.bPlay = new System.Windows.Forms.Button();
@@ -51,10 +53,12 @@
             this.bColor = new System.Windows.Forms.Button();
             this.bSelect = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.cbGroups = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -72,6 +76,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.groupBox4);
             this.splitContainer1.Panel1.Controls.Add(this.groupBox3);
             this.splitContainer1.Panel1.Controls.Add(this.groupBox2);
             this.splitContainer1.Panel1.Controls.Add(this.gbSteps);
@@ -84,11 +89,32 @@
             this.splitContainer1.SplitterDistance = 360;
             this.splitContainer1.TabIndex = 0;
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.cbGroups);
+            this.groupBox4.Controls.Add(this.bSaveGroup);
+            this.groupBox4.Location = new System.Drawing.Point(15, 461);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(324, 63);
+            this.groupBox4.TabIndex = 18;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "groups";
+            // 
+            // bSaveGroup
+            // 
+            this.bSaveGroup.Location = new System.Drawing.Point(10, 22);
+            this.bSaveGroup.Name = "bSaveGroup";
+            this.bSaveGroup.Size = new System.Drawing.Size(95, 23);
+            this.bSaveGroup.TabIndex = 0;
+            this.bSaveGroup.Text = "save group";
+            this.bSaveGroup.UseVisualStyleBackColor = true;
+            this.bSaveGroup.Click += new System.EventHandler(this.bSaveGroup_Click);
+            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.bStop);
             this.groupBox3.Controls.Add(this.bPlay);
-            this.groupBox3.Location = new System.Drawing.Point(15, 431);
+            this.groupBox3.Location = new System.Drawing.Point(15, 393);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(327, 61);
             this.groupBox3.TabIndex = 17;
@@ -118,7 +144,7 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.tableLayoutPanel1);
-            this.groupBox2.Location = new System.Drawing.Point(12, 252);
+            this.groupBox2.Location = new System.Drawing.Point(12, 235);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(330, 152);
             this.groupBox2.TabIndex = 16;
@@ -156,7 +182,7 @@
             this.bRot.Name = "bRot";
             this.bRot.Size = new System.Drawing.Size(102, 37);
             this.bRot.TabIndex = 2;
-            this.bRot.Text = "red";
+            this.bRot.Text = "&1 red";
             this.bRot.UseVisualStyleBackColor = false;
             this.bRot.Click += new System.EventHandler(this.bRot_Click);
             // 
@@ -168,7 +194,7 @@
             this.bBlau.Name = "bBlau";
             this.bBlau.Size = new System.Drawing.Size(102, 37);
             this.bBlau.TabIndex = 3;
-            this.bBlau.Text = " blue";
+            this.bBlau.Text = " &2 blue";
             this.bBlau.UseVisualStyleBackColor = false;
             this.bBlau.Click += new System.EventHandler(this.bBlau_Click);
             // 
@@ -180,7 +206,7 @@
             this.bGruen.Name = "bGruen";
             this.bGruen.Size = new System.Drawing.Size(102, 37);
             this.bGruen.TabIndex = 4;
-            this.bGruen.Text = "green";
+            this.bGruen.Text = "&3 green";
             this.bGruen.UseVisualStyleBackColor = false;
             this.bGruen.Click += new System.EventHandler(this.bGruen_Click);
             // 
@@ -192,7 +218,7 @@
             this.bWhite.Name = "bWhite";
             this.bWhite.Size = new System.Drawing.Size(102, 39);
             this.bWhite.TabIndex = 5;
-            this.bWhite.Text = "white";
+            this.bWhite.Text = "&4 white";
             this.bWhite.UseVisualStyleBackColor = false;
             this.bWhite.Click += new System.EventHandler(this.bWhite_Click);
             // 
@@ -204,7 +230,7 @@
             this.bBlack.Name = "bBlack";
             this.bBlack.Size = new System.Drawing.Size(102, 39);
             this.bBlack.TabIndex = 5;
-            this.bBlack.Text = "schwarz";
+            this.bBlack.Text = "&5 schwarz";
             this.bBlack.UseVisualStyleBackColor = false;
             this.bBlack.Click += new System.EventHandler(this.bBlack_Click);
             // 
@@ -224,7 +250,7 @@
             this.gbSteps.Controls.Add(this.lCurrentMax);
             this.gbSteps.Controls.Add(this.bAdd);
             this.gbSteps.Controls.Add(this.bAddCopy);
-            this.gbSteps.Location = new System.Drawing.Point(12, 100);
+            this.gbSteps.Location = new System.Drawing.Point(12, 94);
             this.gbSteps.Name = "gbSteps";
             this.gbSteps.Size = new System.Drawing.Size(330, 135);
             this.gbSteps.TabIndex = 14;
@@ -290,7 +316,7 @@
             this.groupBox1.Size = new System.Drawing.Size(327, 75);
             this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
+            this.groupBox1.Text = "tools";
             // 
             // bAddPoint
             // 
@@ -333,6 +359,15 @@
             this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
             this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseClick);
             // 
+            // cbGroups
+            // 
+            this.cbGroups.FormattingEnabled = true;
+            this.cbGroups.Location = new System.Drawing.Point(120, 22);
+            this.cbGroups.Name = "cbGroups";
+            this.cbGroups.Size = new System.Drawing.Size(121, 24);
+            this.cbGroups.TabIndex = 1;
+            this.cbGroups.SelectedIndexChanged += new System.EventHandler(this.cbGroups_SelectedIndexChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -347,6 +382,7 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -384,6 +420,9 @@
         private System.Windows.Forms.Button bAddPoint;
         private System.Windows.Forms.Button bColor;
         private System.Windows.Forms.Button bSelect;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Button bSaveGroup;
+        private System.Windows.Forms.ComboBox cbGroups;
     }
 }
 

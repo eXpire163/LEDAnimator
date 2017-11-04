@@ -41,11 +41,28 @@ namespace LEDAnimator
 
 
         #region update
+
+        void update() {
+
+            pictureBox1.Invalidate();
+            updateStepsInfo();
+            cbGroups.Items.Clear();
+
+            foreach (LEDAnimator.Shape.KCGroup kcg in sequenz.Shape.groups) {
+                cbGroups.Items.Add(kcg.name);
+            }
+
+
+        }
+
+
+
+
+
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             sequenz.Shape.draw(e.Graphics, sequenz.CurrentStep);
-            updateStepsInfo();
-
+           
         }
 
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
@@ -105,8 +122,7 @@ namespace LEDAnimator
                     }
                 }*/
 
-                pictureBox1.Invalidate();
-
+            update();
 
             
         }
@@ -124,33 +140,46 @@ namespace LEDAnimator
         private void bWhite_Click(object sender, EventArgs e)
         {
             SelectedColor = Color.White;
+            paintselected();
         }
 
         private void bBlack_Click(object sender, EventArgs e)
         {
             SelectedColor = Color.Black;
+            paintselected();
         }
 
         private void bRot_Click(object sender, EventArgs e)
         {
             SelectedColor = Color.Red;
+            paintselected();
         }
 
         private void bBlau_Click(object sender, EventArgs e)
         {
             SelectedColor = Color.Blue;
+            paintselected();
         }
 
         private void bGruen_Click(object sender, EventArgs e)
         {
             SelectedColor = Color.Green;
+            paintselected();
+        }
+
+        private void paintselected()
+        {
+            foreach(int selectedNumber in selection){
+                sequenz.CurrentStep.Add(selectedNumber, selectedColor);
+
+            }
+            update();
         }
 
         private void bPrev_Click(object sender, EventArgs e)
         {
             sequenz.prevStep();
-            pictureBox1.Invalidate();
-            updateStepsInfo();
+            update();
         }
 
         private void bNext_Click(object sender, EventArgs e)
@@ -160,20 +189,37 @@ namespace LEDAnimator
         private void nextStep()
         {
             sequenz.nextStep();
-            pictureBox1.Invalidate();
-            updateStepsInfo();
+            update();
         }
 
         private void bAdd_Click(object sender, EventArgs e)
         {
             sequenz.addStep();
-            pictureBox1.Update();
-            updateStepsInfo();
+            update();
         }
         private void bAddCopy_Click(object sender, EventArgs e)
         {
             sequenz.cloneStep();
             nextStep();
+        }
+
+
+        private void bSelect_Click(object sender, EventArgs e)
+        {
+            toolsmode = Toolsmode.Select;
+            update();
+        }
+
+        private void bColor_Click(object sender, EventArgs e)
+        {
+            toolsmode = Toolsmode.Paint;
+            update();
+        }
+
+        private void bAddPoint_Click(object sender, EventArgs e)
+        {
+            toolsmode = Toolsmode.AddPoint;
+            update();
         }
 
 
@@ -203,6 +249,7 @@ namespace LEDAnimator
             {
                 sequenz = Sequenz.load();
             }
+            update();
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -239,20 +286,28 @@ namespace LEDAnimator
 
         #endregion
 
-        private void bSelect_Click(object sender, EventArgs e)
+
+        #region groups
+
+        private void bSaveGroup_Click(object sender, EventArgs e)
         {
-            toolsmode = Toolsmode.Select;
+            forms.MessagBoxString mbs = new forms.MessagBoxString();
+            mbs.ShowDialog();
+
+            sequenz.addGroup(selection, mbs.DialogResult);
+            update();
         }
 
-        private void bColor_Click(object sender, EventArgs e)
+        private void cbGroups_SelectedIndexChanged(object sender, EventArgs e)
         {
-            toolsmode = Toolsmode.Paint;
+            var selectedgroup = sequenz.Shape.groups.Where(element => element.name == cbGroups.Text);
+            selection = selectedgroup.First().positions.ToList<int>() ;
+
+            update();
+
         }
 
-        private void bAddPoint_Click(object sender, EventArgs e)
-        {
-            toolsmode = Toolsmode.AddPoint;
-        }
+        #endregion
 
 
 
