@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace LEDAnimator
 {
@@ -67,13 +69,58 @@ namespace LEDAnimator
         }
 
 
+        #region saveload
 
 
-        internal static Sequenz load()
+        public static Sequenz loadFromFIle(Boolean loadLast)
         {
-            // TODO
-            return initNew() ;
+           
+
+            if (new FileInfo(Properties.Settings.Default.lastProfile).Exists && loadLast)
+            {
+                try
+                {
+                    Sequenz sequenz = XMLHelper.DeSerializeObject<Sequenz>(Properties.Settings.Default.lastProfile);
+                    return sequenz;
+                }
+                catch (Exception e) {
+                    MessageBox.Show(e.Message, "Could not load last profile, created new one");
+                }
+
+            }
+
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.FileName = "xmlanimation.xml";
+            if (sfd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                Properties.Settings.Default.lastProfile = sfd.FileName;
+                Properties.Settings.Default.Save();
+            }
+            
+            return Sequenz.initNew();
+
         }
+
+        public static void save(bool saveas, Sequenz sequenz)
+        {
+            if (saveas) {
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.FileName = "xmlanimation.xml";
+                if (sfd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    Properties.Settings.Default.lastProfile = sfd.FileName;
+                    Properties.Settings.Default.Save();
+                }
+            }
+
+            if (MessageBox.Show("Save to " + Properties.Settings.Default.lastProfile, "Save", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
+            {
+                XMLHelper.SerializeObject<Sequenz>(sequenz, Properties.Settings.Default.lastProfile);
+            }
+        }
+
+#endregion
+
 
         private static Sequenz initNew()
         {
@@ -84,9 +131,10 @@ namespace LEDAnimator
             return newSequenz;
         }
 
+
         internal void addStep()
         {
-            
+            throw new NotImplementedException();
         }
 
         internal void cloneStep()
