@@ -14,8 +14,7 @@ namespace LEDAnimator
         public int Y;
 
         public Color color;
-        public bool isSelected = false;
-
+     
         public KCPoint(System.Drawing.Point point) {
             this.X = point.X;
             this.Y = point.Y;
