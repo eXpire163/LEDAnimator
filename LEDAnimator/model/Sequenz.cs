@@ -10,7 +10,7 @@ namespace LEDAnimator
     [Serializable]
     public class Sequenz
     {
-        #region getset
+        #region vars_init
         Shape shape = new Shape();
 
         public Shape Shape
@@ -31,11 +31,28 @@ namespace LEDAnimator
         int currentstep = 0;
         public int CurrentStepInt { get { return currentstep; } }
 
-        public Step CurrentStep { get {
-            if (steps.Count == 0) {
-                steps.Add(new Step());
+        public Step CurrentStep
+        {
+            get
+            {
+                if (steps.Count == 0)
+                {
+                    steps.Add(new Step());
+                }
+                return steps[CurrentStepInt];
             }
-            return steps[CurrentStepInt]; } }
+        }
+     
+
+        public Sequenz()
+        {
+
+
+
+        }
+
+
+
         public void nextStep()
         {
             if (currentstep < TotalSteps)
@@ -59,16 +76,7 @@ namespace LEDAnimator
     
         
         #endregion
-
-
-        public Sequenz()
-        {
-
-           
-
-        }
-
-
+   
         #region saveload
 
 
@@ -119,9 +127,6 @@ namespace LEDAnimator
             }
         }
 
-#endregion
-
-
         private static Sequenz initNew()
         {
             Sequenz newSequenz = new Sequenz();
@@ -131,6 +136,9 @@ namespace LEDAnimator
             return newSequenz;
         }
 
+#endregion
+
+        #region steps
 
         internal void addStep()
         {
@@ -145,11 +153,20 @@ namespace LEDAnimator
             }
         }
 
-        internal void addGroup(List<int> selection, string p)
+        #endregion
+
+        #region groups
+        public void addGroup(List<int> selection, string p)
         {
             if (selection.Count > 1) {
-                shape.groups.Add(new Shape.KCGroup() { name = p, positions = selection.ToArray<int>() });
+                shape.Groups.Add(new Shape.KCGroup() { name = p, positions = selection.ToArray<int>() });
             }
         }
+
+        public void removeGroup(String selectedText)
+        {
+            Shape.Groups.RemoveAll(element => element.name == selectedText);
+        }
+        #endregion
     }
 }

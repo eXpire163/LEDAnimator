@@ -13,13 +13,15 @@ namespace LEDAnimator
 {
     public partial class Form1 : Form
     {
+        #region vars_init
         public enum Toolsmode { AddPoint, Paint, Select }
 
+        Sequenz sequenz;
         Toolsmode toolsmode = Toolsmode.Select;
+      
         List<int> selection = new List<int>();
 
-        Sequenz sequenz;
-
+     
         Color selectedColor = Color.Black;
         public Color SelectedColor
         {
@@ -27,8 +29,7 @@ namespace LEDAnimator
             set
             {
                 selectedColor = value;
-                pictureBox2.BackColor = selectedColor;
-                pictureBox2.Update();
+               
             }
         }
 
@@ -37,7 +38,7 @@ namespace LEDAnimator
             InitializeComponent();
         }
 
-
+        #endregion
 
         #region update
 
@@ -47,20 +48,16 @@ namespace LEDAnimator
             updateStepsInfo();
             cbGroups.Items.Clear();
 
-            foreach (LEDAnimator.Shape.KCGroup kcg in sequenz.Shape.groups) {
+            foreach (LEDAnimator.Shape.KCGroup kcg in sequenz.Shape.Groups) {
                 cbGroups.Items.Add(kcg.name);
             }
 
 
         }
 
-
-
-
-
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            sequenz.Shape.draw(e.Graphics, sequenz.CurrentStep);
+            sequenz.Shape.draw(e.Graphics, sequenz.CurrentStep, selection);
            
         }
 
@@ -125,17 +122,16 @@ namespace LEDAnimator
 
             
         }
+
         private void updateStepsInfo()
         {
             lCurrentMax.Text = String.Format("{0}/{1}  Mode {2}, selection {3}", sequenz.CurrentStepInt, sequenz.TotalSteps, toolsmode.ToString(), string.Join(", ",selection));
         }
+        
         #endregion
 
         #region  buttons
        
-
-       
-
         private void bWhite_Click(object sender, EventArgs e)
         {
             SelectedColor = Color.White;
@@ -230,13 +226,30 @@ namespace LEDAnimator
         private void Form1_Load(object sender, EventArgs e)
         {
             sequenz = Sequenz.loadFromFIle(true);
+            update();
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             Sequenz.save(false, sequenz);   
         }
-      
+        private void bLoad_Click(object sender, EventArgs e)
+        {
+            Sequenz.loadFromFIle(false);
+        }
+
+        private void bSave_Click(object sender, EventArgs e)
+        {
+            Sequenz.save(false, sequenz);
+
+        }
+
+        private void bSaveAs_Click(object sender, EventArgs e)
+        {
+            Sequenz.save(true, sequenz);
+        }
+
+
 
         #endregion
 
@@ -279,34 +292,39 @@ namespace LEDAnimator
 
         private void cbGroups_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var selectedgroup = sequenz.Shape.groups.Where(element => element.name == cbGroups.Text);
-            selection = selectedgroup.First().positions.ToList<int>() ;
+            var selectedgroup = sequenz.Shape.Groups.Where(element => element.name == cbGroups.Text);
+            selection = selectedgroup.First().positions.ToList<int>();
 
+           // update();
+
+        }
+
+      
+        private void bRemoveGroup(object sender, EventArgs e)
+        {
+            sequenz.removeGroup(cbGroups.Text);
             update();
-
         }
 
         #endregion
-
-        private void bLoad_Click(object sender, EventArgs e)
-        {
-            Sequenz.loadFromFIle(false);
-        }
-
-        private void bSave_Click(object sender, EventArgs e)
-        {
-           Sequenz.save(false, sequenz); 
-            
-        }
-
-        private void bSaveAs_Click(object sender, EventArgs e)
-        {
-            Sequenz.save(true, sequenz);
-        }
-
 
 
 
 
     }
+
+    static class Program
+    {
+        /// <summary>
+        /// The main entry point for the application.
+        /// </summary>
+        [STAThread]
+        static void Main()
+        {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new Form1());
+        }
+    }
+
 }

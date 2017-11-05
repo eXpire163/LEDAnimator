@@ -14,7 +14,7 @@ namespace LEDAnimator
     public class Step
     {
 
-
+        #region vars_init
 
         List<KCColor> datapoints = new List<KCColor>();
 
@@ -25,7 +25,10 @@ namespace LEDAnimator
         }
 
         public Step() { }
+        #endregion
 
+        #region control
+        
         public void Add(int selectedNumber, Color selectedColor)
         {
 
@@ -34,20 +37,28 @@ namespace LEDAnimator
             {
                 kcc.Color = selectedColor;
             }
-            else {
+            else
+            {
                 datapoints.Add(new KCColor(selectedNumber, selectedColor));
             }
         }
+        
+        #endregion
+        
+        #region helper
 
         public static Step Clone(Step CurrentStep)
         {
             Step newstep = new Step();
-            foreach (KCColor datapoint in CurrentStep.Datapoints) {
+            foreach (KCColor datapoint in CurrentStep.Datapoints)
+            {
                 newstep.Add(datapoint.position, datapoint.Color);
-            
+
             }
             return newstep;
         }
+        
+        #endregion
     }
 
 
