@@ -14,7 +14,7 @@ namespace LEDAnimator
     public partial class Form1 : Form
     {
         #region vars_init
-        public enum Toolsmode { AddPoint, Paint, Select }
+        public enum Toolsmode { AddPoint, Paint, Select, Move }
 
         Sequenz sequenz;
         Toolsmode toolsmode = Toolsmode.Select;
@@ -32,6 +32,9 @@ namespace LEDAnimator
                
             }
         }
+
+        Boolean moving = false;
+        int moveID = -1;
 
         public Form1()
         {
@@ -217,6 +220,10 @@ namespace LEDAnimator
             update();
         }
 
+        private void bMoveTool(object sender, EventArgs e)
+        {
+            toolsmode = Toolsmode.Move;
+        }
 
         #endregion
 
@@ -308,9 +315,39 @@ namespace LEDAnimator
 
         #endregion
 
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (toolsmode == Toolsmode.Move) {
+                moving = true;
+                moveID = sequenz.Shape.select(new KCPoint(e.Location));            
+            }
+        }
+
+        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+        {
+            moving = false;
+            moveID = -1;
+        }
+
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (moving && moveID >=0) {
+                sequenz.Shape.Positions[moveID].X = e.X;
+                sequenz.Shape.Positions[moveID].Y = e.Y;
+                update();
+            }
+           
+        }
 
 
 
+        #region move
+
+        
+
+
+
+        #endregion
     }
 
     static class Program
