@@ -29,7 +29,10 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.bSave = new System.Windows.Forms.Button();
+            this.bLoad = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.cbGroups = new System.Windows.Forms.ComboBox();
             this.bSaveGroup = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.bStop = new System.Windows.Forms.Button();
@@ -53,7 +56,7 @@
             this.bColor = new System.Windows.Forms.Button();
             this.bSelect = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.cbGroups = new System.Windows.Forms.ComboBox();
+            this.bSaveAs = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -76,6 +79,9 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.bSaveAs);
+            this.splitContainer1.Panel1.Controls.Add(this.bSave);
+            this.splitContainer1.Panel1.Controls.Add(this.bLoad);
             this.splitContainer1.Panel1.Controls.Add(this.groupBox4);
             this.splitContainer1.Panel1.Controls.Add(this.groupBox3);
             this.splitContainer1.Panel1.Controls.Add(this.groupBox2);
@@ -85,9 +91,29 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.pictureBox1);
-            this.splitContainer1.Size = new System.Drawing.Size(1080, 536);
+            this.splitContainer1.Size = new System.Drawing.Size(1080, 573);
             this.splitContainer1.SplitterDistance = 360;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // bSave
+            // 
+            this.bSave.Location = new System.Drawing.Point(126, 537);
+            this.bSave.Name = "bSave";
+            this.bSave.Size = new System.Drawing.Size(75, 23);
+            this.bSave.TabIndex = 20;
+            this.bSave.Text = "save";
+            this.bSave.UseVisualStyleBackColor = true;
+            this.bSave.Click += new System.EventHandler(this.bSave_Click);
+            // 
+            // bLoad
+            // 
+            this.bLoad.Location = new System.Drawing.Point(25, 538);
+            this.bLoad.Name = "bLoad";
+            this.bLoad.Size = new System.Drawing.Size(75, 23);
+            this.bLoad.TabIndex = 19;
+            this.bLoad.Text = "bLoad";
+            this.bLoad.UseVisualStyleBackColor = true;
+            this.bLoad.Click += new System.EventHandler(this.bLoad_Click);
             // 
             // groupBox4
             // 
@@ -99,6 +125,15 @@
             this.groupBox4.TabIndex = 18;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "groups";
+            // 
+            // cbGroups
+            // 
+            this.cbGroups.FormattingEnabled = true;
+            this.cbGroups.Location = new System.Drawing.Point(120, 22);
+            this.cbGroups.Name = "cbGroups";
+            this.cbGroups.Size = new System.Drawing.Size(121, 24);
+            this.cbGroups.TabIndex = 1;
+            this.cbGroups.SelectedIndexChanged += new System.EventHandler(this.cbGroups_SelectedIndexChanged);
             // 
             // bSaveGroup
             // 
@@ -353,26 +388,27 @@
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(716, 536);
+            this.pictureBox1.Size = new System.Drawing.Size(716, 573);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
             this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseClick);
             // 
-            // cbGroups
+            // bSaveAs
             // 
-            this.cbGroups.FormattingEnabled = true;
-            this.cbGroups.Location = new System.Drawing.Point(120, 22);
-            this.cbGroups.Name = "cbGroups";
-            this.cbGroups.Size = new System.Drawing.Size(121, 24);
-            this.cbGroups.TabIndex = 1;
-            this.cbGroups.SelectedIndexChanged += new System.EventHandler(this.cbGroups_SelectedIndexChanged);
+            this.bSaveAs.Location = new System.Drawing.Point(225, 538);
+            this.bSaveAs.Name = "bSaveAs";
+            this.bSaveAs.Size = new System.Drawing.Size(75, 23);
+            this.bSaveAs.TabIndex = 21;
+            this.bSaveAs.Text = "asve as";
+            this.bSaveAs.UseVisualStyleBackColor = true;
+            this.bSaveAs.Click += new System.EventHandler(this.bSaveAs_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1080, 536);
+            this.ClientSize = new System.Drawing.Size(1080, 573);
             this.Controls.Add(this.splitContainer1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -423,6 +459,9 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button bSaveGroup;
         private System.Windows.Forms.ComboBox cbGroups;
+        private System.Windows.Forms.Button bLoad;
+        private System.Windows.Forms.Button bSave;
+        private System.Windows.Forms.Button bSaveAs;
     }
 }
 

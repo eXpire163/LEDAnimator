@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,8 +35,6 @@ namespace LEDAnimator
         public Form1()
         {
             InitializeComponent();
-
-            load();
         }
 
 
@@ -225,38 +224,19 @@ namespace LEDAnimator
 
         #endregion
 
-
-
-
         #region loadclose
 
-        private void load()
-        {
-            sequenz = Sequenz.load();
-        }
-
+        
         private void Form1_Load(object sender, EventArgs e)
         {
-            try
-            {
-                sequenz = XMLHelper.DeSerializeObject<Sequenz>("C:\\temp\\xmlanimation.xml");
-                if (sequenz == null)
-                {
-                    sequenz = Sequenz.load();
-                }
-            }
-            catch
-            {
-                sequenz = Sequenz.load();
-            }
-            update();
+            sequenz = Sequenz.loadFromFIle(true);
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            XMLHelper.SerializeObject<Sequenz>(sequenz, "C:\\temp\\xmlanimation.xml");
-
+            Sequenz.save(false, sequenz);   
         }
+      
 
         #endregion
 
@@ -286,7 +266,6 @@ namespace LEDAnimator
 
         #endregion
 
-
         #region groups
 
         private void bSaveGroup_Click(object sender, EventArgs e)
@@ -308,6 +287,22 @@ namespace LEDAnimator
         }
 
         #endregion
+
+        private void bLoad_Click(object sender, EventArgs e)
+        {
+            Sequenz.loadFromFIle(false);
+        }
+
+        private void bSave_Click(object sender, EventArgs e)
+        {
+           Sequenz.save(false, sequenz); 
+            
+        }
+
+        private void bSaveAs_Click(object sender, EventArgs e)
+        {
+            Sequenz.save(true, sequenz);
+        }
 
 
 
