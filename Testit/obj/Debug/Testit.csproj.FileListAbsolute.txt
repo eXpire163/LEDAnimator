@@ -1,0 +1,7 @@
+C:\Git\LEDAnimator\Testit\bin\Debug\Testit.dll
+C:\Git\LEDAnimator\Testit\bin\Debug\Testit.pdb
+C:\Git\LEDAnimator\Testit\bin\Debug\LEDAnimator.exe
+C:\Git\LEDAnimator\Testit\bin\Debug\LEDAnimator.pdb
+C:\Git\LEDAnimator\Testit\obj\Debug\Testit.csprojResolveAssemblyReference.cache
+C:\Git\LEDAnimator\Testit\obj\Debug\Testit.dll
+C:\Git\LEDAnimator\Testit\obj\Debug\Testit.pdb

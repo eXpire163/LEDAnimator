@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LEDAnimator.helper;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;

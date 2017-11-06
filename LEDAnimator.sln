@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LEDAnimator", "LEDAnimator\LEDAnimator.csproj", "{9E215442-9039-48DB-B2FE-6B52CBEDE90B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testit", "Testit\Testit.csproj", "{68D84634-FCDC-4F54-AB75-16F4C93A7D3C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{9E215442-9039-48DB-B2FE-6B52CBEDE90B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E215442-9039-48DB-B2FE-6B52CBEDE90B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E215442-9039-48DB-B2FE-6B52CBEDE90B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68D84634-FCDC-4F54-AB75-16F4C93A7D3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68D84634-FCDC-4F54-AB75-16F4C93A7D3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68D84634-FCDC-4F54-AB75-16F4C93A7D3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68D84634-FCDC-4F54-AB75-16F4C93A7D3C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
