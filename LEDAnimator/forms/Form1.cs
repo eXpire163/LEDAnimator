@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LEDAnimator.helper;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -39,6 +40,8 @@ namespace LEDAnimator
         public Form1()
         {
             InitializeComponent();
+
+
         }
 
         #endregion
@@ -315,11 +318,14 @@ namespace LEDAnimator
 
         #endregion
 
+        #region move
+
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
-            if (toolsmode == Toolsmode.Move) {
+            if (toolsmode == Toolsmode.Move)
+            {
                 moving = true;
-                moveID = sequenz.Shape.select(new KCPoint(e.Location));            
+                moveID = sequenz.Shape.select(new KCPoint(e.Location));
             }
         }
 
@@ -331,19 +337,17 @@ namespace LEDAnimator
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-            if (moving && moveID >=0) {
-                sequenz.Shape.Positions[moveID].X = e.X;
-                sequenz.Shape.Positions[moveID].Y = e.Y;
+            if (moving && moveID >= 0)
+            {
+
+
+                sequenz.Shape.Positions[moveID].X = Mathhelper.RoundOff(e.X);
+                sequenz.Shape.Positions[moveID].Y = Mathhelper.RoundOff(e.Y);
                 update();
             }
-           
+
         }
 
-
-
-        #region move
-
-        
 
 
 
